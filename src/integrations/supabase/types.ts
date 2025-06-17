@@ -890,6 +890,38 @@ export type Database = {
         }
         Relationships: []
       }
+      favorite_routes: {
+        Row: {
+          created_at: string
+          id: string
+          route_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          route_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          route_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorite_routes_route_id_fkey"
+            columns: ["route_id"]
+            isOneToOne: false
+            referencedRelation: "routes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fleet: {
         Row: {
           base_price_multiplier: number | null
@@ -1900,6 +1932,42 @@ export type Database = {
             referencedColumns: ["user_id"]
           },
         ]
+      }
+      travel_preferences: {
+        Row: {
+          accessibility_needs: string
+          created_at: string
+          email_notifications: boolean
+          id: string
+          preferred_departure_time: string
+          preferred_seat_type: string
+          sms_notifications: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          accessibility_needs?: string
+          created_at?: string
+          email_notifications?: boolean
+          id?: string
+          preferred_departure_time?: string
+          preferred_seat_type?: string
+          sms_notifications?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          accessibility_needs?: string
+          created_at?: string
+          email_notifications?: boolean
+          id?: string
+          preferred_departure_time?: string
+          preferred_seat_type?: string
+          sms_notifications?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {

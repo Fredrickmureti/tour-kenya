@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Users, Phone, Mail, MapPin, Seat, Clock } from 'lucide-react';
+import { Users, Phone, Mail, MapPin, User, Clock } from 'lucide-react';
 
 interface PassengerInfo {
   id: string;
@@ -147,7 +147,7 @@ const PassengerManifest: React.FC = () => {
                             {passenger.bookings.profiles.full_name || 'Unknown Passenger'}
                           </h3>
                           <div className="flex items-center space-x-2">
-                            <Seat className="h-4 w-4 text-blue-500" />
+                            <User className="h-4 w-4 text-blue-500" />
                             <span className="font-medium">
                               Seats: {passenger.seat_numbers.join(', ')}
                             </span>
