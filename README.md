@@ -1,342 +1,553 @@
 
-# 🚍 RouteAura Bus Booking Platform
+# 🚍 RouteAura - Advanced Bus Booking & Fleet Management Platform
 
-> **Modern fleet & route management, online ticketing, and content control—all in one powerful system.**
+<div align="center">
 
----
+![RouteAura Logo](https://via.placeholder.com/200x80/2563eb/ffffff?text=RouteAura)
 
-## ✨ Table of Contents
+**The complete solution for modern bus transportation management**
 
-- [Overview](#overview)
-- [How The Platform Works](#how-the-platform-works)
-- [Key Features](#key-features)
-- [🧑‍💻 Admin System](#admin-system)
-  - [Admin Dashboard Breakdown](#admin-dashboard-breakdown)
-  - [Superadmin vs. Branch Admin](#superadmin-vs-branch-admin)
-  - [Admin Content Management](#admin-content-management)
-- [🧑‍🦰 Passengers/Users](#passengersusers)
-- [System Architecture](#system-architecture)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Authentication & Roles](#authentication--roles)
-- [📈 Analytics & Reporting](#-analytics--reporting)
-- [🌈 UI/UX Design](#-uiux-design)
-- [🛠️ Local Development Setup](#️-local-development-setup)
-- [📝 Contribution](#-contribution)
-- [FAQ & Troubleshooting](#faq--troubleshooting)
-- [License](#license)
-- [Support & Resources](#support--resources)
+[![Built with React](https://img.shields.io/badge/Built%20with-React-61dafb?logo=react)](https://reactjs.org/)
+[![Powered by Supabase](https://img.shields.io/badge/Powered%20by-Supabase-3ecf8e?logo=supabase)](https://supabase.com/)
+[![Styled with Tailwind](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
+[![UI Components](https://img.shields.io/badge/UI-shadcn%2Fui-000000)](https://ui.shadcn.com/)
+
+</div>
 
 ---
 
-## Overview
+## 🌟 Overview
 
-**RouteAura** is an advanced bus booking and fleet management platform enabling seamless online seat booking for passengers and robust back-office operations for transport company admins.
+RouteAura is a comprehensive, modern bus booking and fleet management platform that bridges the gap between passengers seeking convenient travel booking and transport companies requiring robust operational management. Built with cutting-edge technologies, it offers a seamless experience for online seat booking, real-time fleet management, and comprehensive business analytics.
 
-- **Passengers:** Discover, book, and manage bus journeys.
-- **Admins:** Manage bookings, buses, routes, schedules, receipts, content, and analytics.
-- **Future-Facing:** Driver login/dashboard, multi-branch support, role-based permissions, live analytics.
-
----
-
-## How The Platform Works
-
-### For Passengers (Frontend)
-
-1. **Landing Page:** 
-   - Hero section with search form for locations/routes.
-   - Key selling points, features, fleet preview, testimonials.
-
-2. **Journey Booking Flow:**
-   - Search/browse available routes with real-time seat selection.
-   - Register/Login for personalized bookings.
-   - Book and receive tickets/receipts by email and dashboard.
-
-3. **Manage Bookings:**
-   - See upcoming/past journeys, reschedule or request a change, download receipts.
-
-4. **Company Info:**
-   - About page, company values, milestones, team, and stats—all editable via admin CMS.
+### 🎯 Core Mission
+- **For Passengers**: Simplify route discovery, seat booking, and journey management
+- **For Operators**: Provide powerful tools for fleet, route, and booking management
+- **For Admins**: Enable data-driven decisions through comprehensive analytics
 
 ---
 
-### For Admins (Back Office)
+## ✨ Key Features
 
-1. **Login:**  
-   - Superadmins have all-system access; branch admins see only assigned branch data.
+### 🧑‍🦰 Passenger Experience
+- **Smart Route Discovery**: Advanced search with real-time availability
+- **Interactive Seat Selection**: Live seat maps with real-time booking updates
+- **Multi-Fleet Options**: Choose from Standard, Premium, and Luxury buses
+- **Digital Receipts**: Instant receipt generation with QR codes
+- **Booking Management**: View, reschedule, and manage bookings
+- **Mobile-First Design**: Responsive interface optimized for all devices
 
-2. **Dashboard:**  
-   - High-level KPIs, charts (bookings, revenue, routes, users).
+### 🏢 Admin Capabilities
+- **Comprehensive Dashboard**: Real-time KPIs, analytics, and insights
+- **Fleet Management**: Complete bus fleet configuration and monitoring
+- **Route Administration**: Dynamic route creation with flexible pricing
+- **Booking Operations**: Manual booking creation and management
+- **User Management**: Customer profile and authentication handling
+- **Content Management**: Live website content editing and SEO optimization
+- **Multi-Branch Support**: Hierarchical access control and data isolation
 
-3. **Management Modules** *(see below)*:
-   - Bookings, manual bookings, fleet, schedules, locations, drivers, users, receipts, content, branches.
-
-4. **Content Management:**  
-   - Powerful, live CMS for About/team/values/timeline/stats.
-
-5. **Branch System:**
-   - Each admin is tied to a branch; superadmins can manage all branches and assign admins.
-
-6. **Analytics & Data Export:**  
-   - Built-in analytics; CSV/XLS export for all tables.
-
----
-
-## Key Features
-
-- **Online Booking:** Real-time seat map, OTP/auth, digital tickets.
-- **Comprehensive Admin:** Booking management, schedules, receipts, branches, super roles.
-- **Live Content Edits:** About, team, values, company stats—instant updates.
-- **Global Site Configuration:** Manage site name, logo, navigation links, and footer content directly from the admin panel.
-- **Multi-branch:** All entities (routes, fleet, bookings, users) are branch-tied.
-- **Security:** RLS on all sensitive tables, robust Supabase authentication.
-- **Modern UI:** Mobile-first, beautiful Tailwind + shadcn/ui, instant toasts, and iconography.
-- **Export & Audit:** Download reports, analytics dashboards, data visibility by role.
+### 🔧 Technical Excellence
+- **Real-Time Updates**: Live seat availability using Supabase Realtime
+- **Advanced Security**: Row-Level Security (RLS) with role-based access
+- **Data Export**: Comprehensive reporting and CSV/Excel export
+- **Scalable Architecture**: Built for growth with modern web technologies
 
 ---
 
-## 🧑‍💻 Admin System
-
-Admin dashboard is available at:
-
-```
-/route-aura-booking-admin-page/dashboard
-```
-
-### Admin Dashboard Breakdown
-
-> **Navigation Sidebar:**
->
-> | Module             | Path                                      | Description                                            |
-> |--------------------|-------------------------------------------|--------------------------------------------------------|
-> | Overview           | `/dashboard`                              | Main stats, charts, KPIs                               |
-> | Bookings           | `/dashboard/bookings`                     | Manage all bookings                                    |
-> | Manual Bookings    | `/dashboard/manual-bookings`              | Create bookings offline/manual                         |
-> | Reschedule Req.    | `/dashboard/reschedule-requests`          | Handle reschedule requests                             |
-> | Receipts           | `/dashboard/receipts`                     | Issue/verify receipts                                  |
-> | Receipt Templates  | `/dashboard/receipt-templates`            | Set up custom receipt formats                          |
-> | Users              | `/dashboard/users`                        | All passengers/users                                   |
-> | Fleet              | `/dashboard/fleet`                        | Manage buses/fleet data                                |
-> | Schedules          | `/dashboard/bus-schedules`                | Trip timings and bus schedule                          |
-> | Routes             | `/dashboard/routes`                       | Create/edit routes                                     |
-> | Locations          | `/dashboard/locations`                    | Manage stop points                                     |
-> | Drivers            | `/dashboard/drivers`                      | Onboard and assign drivers                             |
-> | Reviews            | `/dashboard/reviews`                      | Manage customer reviews                                |
-> | Messages (Inbox)   | `/dashboard/messages`                     | Contact/inbox system                                   |
-> | FAQs               | `/dashboard/faqs`                         | Site FAQ management                                    |
-> | Offices            | `/dashboard/offices`                      | Branch office addresses                                |
-
-<details>
-<summary>Superadmin Only Tabs</summary>
-
-| Module             | Path                            | Description                             |
-|--------------------|---------------------------------|-----------------------------------------|
-| Branches           | `/dashboard/branches`           | Add/edit branch data                    |
-| Content Management | `/dashboard/content-management` | About/Team/Stats live editor            |
-| Site Settings      | `/dashboard/site-settings`      | Manage branding, navigation, and footer |
-| Data Export        | `/dashboard/data-management`    | Export all system data                  |
-| Admin Users        | `/dashboard/admin-users`        | Create new branch admins                |
-
-</details>
-
----
-
-### Superadmin vs. Branch Admin
-
-- **Superadmin:**  
-  - Unrestricted control, ALL branches/tables visible.
-  - Assign new admins, manage all company data/content.
-  - RLS bypass for top-level operations.
-- **Branch Admin:**  
-  - Only see/edit their assigned branch (bookings, users, receipts).
-  - Cannot edit company-wide settings, export all data, or create new admins.
-
-## Admin Content Management
-
-*Powerful CMS available at `/dashboard/content-management` for Superadmins*  
-- All "About", "Values", "Team", "Milestones", and "Statistics" data editable via sleek forms.
-- Changes go live instantly; past versions auditable via RLS policies.
-
----
-
-## 🧑‍🦰 Passengers/Users
-
-**Landing:** `/`  
-Explore available routes, company info, fleet, and more.
-
-### Booking Flow:
-
-1. **Search:** Input origin/destination, select branch/location.
-2. **Select Route & Seat:** Live seat maps using real-time DB sync.
-3. **Login/Signup:** Secure OTP/email or password login.
-4. **Pay/Confirm:** (Payment gateway integration future-proofed—currently confirmation for demo)
-5. **Receive Ticket/Receipt:** Via email & on dashboard.
-6. **Manage Bookings:** View, reschedule, cancel, or download receipt.
-
----
-
-## System Architecture
+## 🏗️ System Architecture
 
 ```mermaid
-graph TD
-A[Frontend: React/Vite] -->|REST| B[Supabase (API/DB/auth)]
-B -->|Storage| C[Files/Images]
-B -->|Edge Functions| D[Custom Backend Logic]
-B -->|RLS| E[Auth/Branch Logic]
-A -->|Realtime| B
+graph TB
+    subgraph "Frontend Layer"
+        A[React 18 + Vite]
+        B[Tailwind CSS + shadcn/ui]
+        C[React Query for State Management]
+        D[React Router for Navigation]
+    end
+    
+    subgraph "Backend Services"
+        E[Supabase Database]
+        F[Supabase Auth]
+        G[Supabase Realtime]
+        H[Supabase Storage]
+        I[Edge Functions]
+    end
+    
+    subgraph "Data Layer"
+        J[PostgreSQL with RLS]
+        K[Real-time Subscriptions]
+        L[File Storage]
+    end
+    
+    A --> E
+    C --> E
+    F --> A
+    G --> A
+    E --> J
+    G --> K
+    H --> L
+    I --> E
+    
+    style A fill:#61dafb
+    style E fill:#3ecf8e
+    style J fill:#336791
 ```
 
-- **Frontend:** React + Vite + Tanstack React Query for data, cache, and state.
-- **Backend:** Supabase Postgres + direct row-level security + Edge Functions.
-- **Storage:** Supabase for all booking, user, fleet, and static content.
-- **Realtime:** Bus seat selection, booking status.
-
 ---
 
-## Tech Stack
-
-| Layer      | Tech |
-|------------|------|
-| **Frontend** | React 18, Vite, TypeScript, Tailwind CSS, shadcn/ui |
-| **Auth**  | Supabase Auth (Admin, Branch admin, Passenger) |
-| **Backend** | Supabase Postgres (w/ RLS) + Edge Functions |
-| **Data**  | @tanstack/react-query, Recharts (analytics) |
-| **UI**    | Lucide icons, Sonner toasts, date-fns (utils) |
-
----
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
-├── components/
-│   ├── admin/              # All admin dashboard, tab modules, content mgmt
-│   ├── booking/            # Booking-related step flows
-│   ├── ui/                 # shadcn/ui and re-used primitives
-│   └── layout/             # Navbar, footer, wrappers
-├── contexts/               # Auth, branch, theme, etc.
-├── hooks/                  # Custom hooks (data fetching, utils)
-├── integrations/           # Supabase client & types
-├── pages/                  # All routed pages (home, about, admin, etc.)
-├── utils/                  # Utility functions
-public/                     # Static assets (images/icons)
+├── 📂 components/
+│   ├── 📂 admin/                           # Admin dashboard components
+│   │   ├── 📂 content-management/          # CMS components
+│   │   ├── 📂 RoutesManagement/           # Route management
+│   │   ├── 📂 receipt-management/         # Receipt handling
+│   │   └── 📄 AdminDashboard.tsx          # Main admin interface
+│   ├── 📂 auth/                           # Authentication components
+│   │   ├── 📄 SignupForm.tsx              # User registration
+│   │   └── 📄 SocialAuthButtons.tsx       # Social login options
+│   ├── 📂 booking/                        # Booking flow components
+│   │   ├── 📂 components/                 # Booking sub-components
+│   │   ├── 📂 hooks/                      # Booking-related hooks
+│   │   └── 📄 EnhancedAutoBookingFormWithFleet.tsx
+│   ├── 📂 layout/                         # Layout components
+│   │   ├── 📄 Navbar.tsx                  # Main navigation
+│   │   └── 📄 Footer.tsx                  # Site footer
+│   └── 📂 ui/                             # Reusable UI components (shadcn/ui)
+├── 📂 contexts/                           # React context providers
+│   ├── 📄 AuthContext.tsx                 # User authentication
+│   ├── 📄 AdminAuthContext.tsx            # Admin authentication
+│   └── 📄 BranchContext.tsx               # Branch management
+├── 📂 hooks/                              # Custom React hooks
+│   ├── 📄 useFleetData.tsx                # Fleet management
+│   └── 📄 useSiteSettings.ts              # Site configuration
+├── 📂 integrations/
+│   └── 📂 supabase/
+│       ├── 📄 client.ts                   # Supabase client configuration
+│       └── 📄 types.ts                    # Database type definitions
+├── 📂 pages/                              # Route-based page components
+│   ├── 📂 admin/                          # Admin-only pages
+│   ├── 📂 home/                           # Homepage components
+│   ├── 📄 BookingPage.tsx                 # Booking interface
+│   ├── 📄 FleetPage.tsx                   # Fleet showcase
+│   └── 📄 RoutesPage.tsx                  # Available routes
+└── 📂 utils/                              # Utility functions
 ```
-Special care:  
-- All major admin features are split into focused files in `components/admin/`
-- Pages for navigation/routing in `pages/`
-- Reusable UI in `components/ui/`, based on shadcn/ui.
 
 ---
 
-## Authentication & Roles
+## 🗄️ Database Schema & Supabase Integration
 
-- **Supabase Auth:**  
-  All API calls secured. Only admins with proper roles access sensitive tabs.
-- **RLS Policies:**  
-  All DB tables protected to prevent unauthorized reads/writes.
-- **Route Guard:**  
-  React Router checks plus context guards for specific admin pages.
+### Core Tables Structure
 
----
+#### 🔐 Authentication & Users
+- **`auth.users`** - Supabase managed user authentication
+- **`profiles`** - Extended user information
+- **`admin_users`** - Administrative user profiles
+- **`admin_auth`** - Admin authentication credentials
+- **`branch_admins`** - Branch-admin relationships
 
-## 📈 Analytics & Reporting
+#### 🚌 Fleet & Operations
+- **`fleet`** - Bus fleet configuration and details
+- **`routes`** - Available travel routes
+- **`route_fleet_pricing`** - Custom pricing per route-fleet combination
+- **`bus_schedules`** - Schedule management for buses
+- **`seat_availability`** - Real-time seat booking status
 
-- **Charts:**  
-  Real-time bookings, usage, revenue, and occupancy visits (Recharts).
-- **Export:**  
-  Superadmin can export bookings, users, receipts, analytics as CSV/XLS instantly from any dashboard.
-- **Custom Reports:**  
-  Data filtered by branch, date, route, and booking type.
+#### 📋 Bookings & Transactions
+- **`bookings`** - Customer booking records
+- **`manual_bookings`** - Admin-created bookings
+- **`receipts`** - Payment and receipt management
+- **`reschedule_requests`** - Booking modification requests
 
----
-
-## 🌈 UI/UX Design
-
-- **Responsive:**  
-  Mobile-first, touch-optimized, fully adaptive layout.
-- **shadcn/ui:**  
-  Consistent buttons, forms, tabs, switchers, skeletons, and more.
-- **Toasts:**  
-  All CRUD ops give instant Sonner-based feedback.
+#### 🏢 Organization
+- **`branches`** - Multi-branch organization support
+- **`locations`** - Pickup/drop-off locations
+- **`drivers`** - Driver information and assignments
 
 ---
 
-## 🛠️ Local Development Setup
+## 🔌 Supabase Integration Points
 
-**1. Clone & Install**
+### 📍 Key Integration Locations
 
+#### Authentication Calls
+```typescript
+// User Authentication
+src/contexts/AuthContext.tsx                    // Main user auth
+src/contexts/AdminAuthContext.tsx               // Admin authentication
+src/pages/LoginPage.tsx                         // User login
+src/pages/admin/AdminLoginPage.tsx              // Admin login
+```
+
+#### Data Fetching Hooks
+```typescript
+// Fleet Management
+src/hooks/useFleetData.tsx                      // Fleet operations
+src/components/admin/FleetManagement.tsx        // Admin fleet management
+
+// Booking Operations
+src/components/booking/hooks/useBookingData.tsx // Booking data
+src/components/booking/hooks/useBookingMutation.tsx // Booking mutations
+src/pages/home/hooks/useHomeData.ts             // Homepage data
+
+// Route Management
+src/components/admin/RoutesManagement/useRoutesData.tsx // Route operations
+```
+
+#### Real-time Features
+```typescript
+// Seat Availability
+src/components/booking/hooks/useSeatManagement.tsx      // Live seat updates
+src/components/booking/EnhancedSeatSelector.tsx         // Real-time seat map
+
+// Fleet Management
+src/components/booking/hooks/useFleetManagement.tsx     // Bus assignment
+```
+
+#### Admin Operations
+```typescript
+// Content Management
+src/components/admin/ContentManagement.tsx              // CMS operations
+src/components/admin/content-management/contentOperations.ts // Content CRUD
+
+// User Management
+src/components/admin/AdminUsersManagement.tsx           // Admin user operations
+src/components/admin/UsersManagement.tsx                // Customer management
+
+// Analytics & Reporting
+src/components/admin/AnalyticsDashboard.tsx             // Dashboard analytics
+src/components/admin/DataExportManager.tsx              // Data export
+```
+
+### 🔄 Real-time Subscriptions
+- **Seat Availability**: Live updates during booking process
+- **Bus Schedules**: Real-time schedule modifications
+- **Booking Status**: Instant booking confirmations
+
+### 🛡️ Security Implementation
+- **Row Level Security (RLS)**: Implemented on all sensitive tables
+- **Role-based Access**: Superadmin vs Branch admin permissions
+- **Data Isolation**: Branch-specific data access controls
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js** 18+ 
+- **npm** or **yarn**
+- **Supabase Account** (for backend services)
+
+### Installation
+
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+   cd routeaura-booking-platform
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**
+   
+   The Supabase configuration is already set up in:
+   ```typescript
+   // src/integrations/supabase/client.ts
+   const SUPABASE_URL = "https://jjwqyevuyysdvgbxykqs.supabase.co";
+   const SUPABASE_PUBLISHABLE_KEY = "your-anon-key";
+   ```
+
+4. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Access the Application**
+   - **Frontend**: http://localhost:5173
+   - **Admin Panel**: http://localhost:5173/route-aura-booking-admin-page/dashboard
+
+---
+
+## 👥 User Roles & Access
+
+### 🧑‍🦰 Passengers
+- Browse available routes and schedules
+- Book seats with real-time availability
+- Manage personal bookings and receipts
+- Request booking modifications
+- Leave reviews and feedback
+
+### 👨‍💼 Branch Admins
+- Access to assigned branch data only
+- Manage bookings for their branch
+- Create manual bookings
+- Handle customer support requests
+- Generate reports for their branch
+
+### 🔧 Superadmins
+- Full system access across all branches
+- Manage fleet, routes, and schedules
+- User and admin account management
+- Content management system access
+- System-wide analytics and reporting
+- Data export capabilities
+
+---
+
+## 🎨 UI/UX Design System
+
+### Design Philosophy
+- **Mobile-First**: Responsive design optimized for all screen sizes
+- **Accessibility**: WCAG 2.1 compliant with proper ARIA labels
+- **Performance**: Optimized for fast loading and smooth interactions
+- **Consistency**: Unified design language across all components
+
+### Component Library
+- **shadcn/ui**: Modern, accessible component library
+- **Tailwind CSS**: Utility-first CSS framework
+- **Lucide Icons**: Consistent iconography
+- **Sonner**: Toast notifications for user feedback
+
+### Color Palette
+```css
+--primary: #2563eb      /* Brand Blue */
+--secondary: #16a34a    /* Success Green */
+--accent: #dc2626       /* Error/Alert Red */
+--muted: #6b7280        /* Text Secondary */
+--background: #ffffff   /* Main Background */
+```
+
+---
+
+## 📊 Analytics & Reporting
+
+### Dashboard Metrics
+- **Booking Analytics**: Volume, revenue, and conversion rates
+- **Fleet Utilization**: Occupancy rates and performance metrics
+- **User Engagement**: Registration, retention, and satisfaction
+- **Route Performance**: Popular routes and demand patterns
+
+### Export Capabilities
+- **Booking Reports**: Detailed booking data with filters
+- **Financial Reports**: Revenue analysis and payment tracking
+- **User Reports**: Customer demographics and behavior
+- **Operational Reports**: Fleet and route performance
+
+---
+
+## 🔧 Development Workflow
+
+### Code Quality
 ```bash
-git clone <repo-url>
-cd <project-dir>
+# Linting
+npm run lint
+
+# Type checking
+npm run type-check
+
+# Testing
+npm run test
+```
+
+### Build Process
+```bash
+# Development build
+npm run dev
+
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Deployment
+The application is optimized for deployment on:
+- **Vercel** (Recommended)
+- **Netlify**
+- **Any static hosting platform**
+
+---
+
+## 🛠️ Technical Stack
+
+| Category | Technology | Purpose |
+|----------|------------|---------|
+| **Frontend Framework** | React 18 | Component-based UI development |
+| **Build Tool** | Vite | Fast development and building |
+| **Language** | TypeScript | Type-safe development |
+| **Styling** | Tailwind CSS | Utility-first CSS framework |
+| **UI Components** | shadcn/ui | Pre-built accessible components |
+| **State Management** | TanStack Query | Server state management |
+| **Routing** | React Router | Client-side routing |
+| **Backend** | Supabase | Database, Auth, and APIs |
+| **Database** | PostgreSQL | Relational database with RLS |
+| **Real-time** | Supabase Realtime | Live data synchronization |
+| **Authentication** | Supabase Auth | User and admin authentication |
+| **Icons** | Lucide React | Consistent iconography |
+| **Notifications** | Sonner | Toast notifications |
+| **Charts** | Recharts | Data visualization |
+
+---
+
+## 🔐 Security Features
+
+### Authentication & Authorization
+- **Multi-factor Authentication**: Secure user access
+- **Role-based Access Control**: Granular permissions
+- **Session Management**: Secure session handling
+- **Password Security**: Encrypted password storage
+
+### Data Protection
+- **Row Level Security**: Database-level access control
+- **Data Encryption**: Sensitive data encryption
+- **Input Validation**: Comprehensive input sanitization
+- **CORS Protection**: Cross-origin request security
+
+### Compliance
+- **GDPR Ready**: Privacy-compliant data handling
+- **Audit Logging**: Comprehensive activity tracking
+- **Data Backup**: Regular automated backups
+- **SSL/TLS**: Encrypted data transmission
+
+---
+
+## 🚀 Performance Optimizations
+
+### Frontend Optimizations
+- **Code Splitting**: Lazy loading of route components
+- **Image Optimization**: Responsive images with lazy loading
+- **Bundle Analysis**: Optimized bundle sizes
+- **Caching Strategy**: Efficient browser caching
+
+### Backend Optimizations
+- **Database Indexing**: Optimized query performance
+- **Connection Pooling**: Efficient database connections
+- **Edge Functions**: Serverless compute for custom logic
+- **CDN Integration**: Global content distribution
+
+---
+
+## 🤝 Contributing
+
+### Development Guidelines
+1. **Follow TypeScript**: Maintain type safety throughout
+2. **Component Structure**: Create focused, reusable components
+3. **Testing**: Write comprehensive tests for new features
+4. **Documentation**: Update documentation for significant changes
+
+### Pull Request Process
+1. Fork the repository
+2. Create a feature branch
+3. Implement changes with tests
+4. Update documentation
+5. Submit pull request with detailed description
+
+---
+
+## 📝 API Documentation
+
+### Core Endpoints
+
+#### Booking Management
+```typescript
+// Create booking
+POST /bookings
+// Get user bookings
+GET /bookings?user_id={id}
+// Update booking status
+PATCH /bookings/{id}
+```
+
+#### Fleet Operations
+```typescript
+// Get available fleet
+GET /fleet?route_id={id}&date={date}
+// Get seat availability
+GET /seat-availability?route_id={id}&date={date}
+```
+
+#### Admin Operations
+```typescript
+// Get analytics data
+GET /admin/analytics?branch_id={id}
+// Export booking data
+GET /admin/export/bookings
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### Authentication Problems
+```bash
+# Clear browser storage
+localStorage.clear()
+sessionStorage.clear()
+
+# Verify Supabase connection
+# Check src/integrations/supabase/client.ts
+```
+
+#### Build Errors
+```bash
+# Clear node modules and reinstall
+rm -rf node_modules package-lock.json
 npm install
 ```
 
-**2. Configure Supabase**
-
-- Update keys at `src/integrations/supabase/client.ts` if self-hosted.
-- Review `.sql` migrations in `/supabase/migrations` for RLS and table structure.
-
-**3. Run App**
-
+#### Database Connection
 ```bash
-npm run dev
+# Verify Supabase project status
+# Check network connectivity
+# Validate API keys
 ```
-Visit [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 📝 Contribution
+## 📚 Additional Resources
 
-- Keep code modular, favor small focused files.
-- Use TypeScript types.
-- Stick to existing design system (shadcn/ui + Tailwind).
-- For backend: add new `.sql` migrations, do NOT change existing ones.
-- Always run and test before pushing a PR.
+### Documentation Links
+- [React Documentation](https://reactjs.org/docs)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+- [shadcn/ui Components](https://ui.shadcn.com/)
 
----
-
-## FAQ & Troubleshooting
-
-<details>
-<summary>I'm not seeing admin routes after login!</summary>
-
-Check your admin role and assigned branch. Only superadmins see all tabs.
-</details>
-
-<details>
-<summary>How do I add/edit content for the About or Team page?</summary>
-
-Login as superadmin, open "Content Management" in the admin sidebar.
-</details>
-
-<details>
-<summary>How do I export report data?</summary>
-
-Data export is under the "Data Management" tab for superadmins.
-</details>
-
-<details>
-<summary>Can I connect a custom domain?</summary>
-
-Yes! After deploying on Lovable, open Settings > Domains.
-</details>
+### Community & Support
+- [Project Issues](https://github.com/your-repo/issues)
+- [Discussions](https://github.com/your-repo/discussions)
+- [Discord Community](https://discord.gg/your-invite)
 
 ---
 
-## License
+## 📄 License
 
-MIT
-
----
-
-## Support & Resources
-
-- [Lovable documentation](https://docs.lovable.dev)
-- [Supabase documentation](https://supabase.com/docs)
-- [shadcn/ui components](https://ui.shadcn.com/)
-- [Community Discord](https://discord.gg/lovable)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-> _RouteAura—making route, fleet, and journey management delightful for both company and customers._ 🚎✨
+## 🙏 Acknowledgments
 
+- **Supabase Team** for the excellent backend platform
+- **shadcn** for the beautiful UI component library
+- **Tailwind CSS** for the utility-first approach
+- **React Team** for the amazing framework
+- **All Contributors** who have helped improve this platform
+
+---
+
+<div align="center">
+
+**RouteAura - Making journey management delightful for everyone** 🚎✨
+
+*Built with ❤️ using modern web technologies*
+
+</div>
